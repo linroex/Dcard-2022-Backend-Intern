@@ -6,13 +6,15 @@
 # P1
 - [ ] UI
 - [ ] db migration
+- [ ] validate param / error check
+- [ ] db connection reuse
 
 # P2
 - [ ] k8s / GKE Deploy
-- [ ] Github Action
+- [ ] GitHub Action
 - [ ] DB ORM
 - [ ] reCAPTCHA
 - [ ] Redis
 - [ ] API Rate Limit
 - [ ] Custom Slug
-- [ ] New slug algorithm
+- [ ] New Slug Algorithm
