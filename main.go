@@ -17,6 +17,8 @@ func main() {
 		v1.POST("/urls", urls)
 	}
 
+	router.GET("/:id", goUrl)
+
 	router.Run("127.0.0.1:8080")
 
 }
