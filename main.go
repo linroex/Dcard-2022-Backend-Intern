@@ -5,7 +5,7 @@ import (
 )
 
 type ShortUrlRequest struct {
-	Url      string
+	Url      string `binding:"required"`
 	ExpireAt string
 }
 

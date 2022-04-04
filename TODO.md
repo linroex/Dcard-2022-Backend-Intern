@@ -1,6 +1,6 @@
 # P0
-- [ ] go url api
-- [ ] expiredAt
+- [v] go url api
+- [v] expiredAt
 - [ ] Unit Test
 
 # P1
