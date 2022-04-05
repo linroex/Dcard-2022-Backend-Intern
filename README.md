@@ -10,11 +10,10 @@
 
 ## 架構說明
 
-Backend: Golang (Gin)
-Testing: go-sqlmock + testify
-DB: MySQL
-
-Shorten Algorithm: concat(hex(id) + randString(len=3)) 
+- Backend: Golang (Gin)
+- Testing: go-sqlmock + testify
+- DB: MySQL
+- Shorten Algorithm: concat(hex(id) + randString(len=3)) 
 
 不知道思路有什麼好講的，因為這次我做的架構很單純，就只是把參數收進來然後存入資料庫而已，基本的 CRUD。
 
