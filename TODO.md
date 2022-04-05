@@ -4,17 +4,17 @@
 - [ ] Unit Test
 
 # P1
-- [ ] UI
+- [ ] Redis
 - [ ] db migration
+- [ ] New Slug Algorithm
+- [ ] UI
 - [ ] validate param / error check
-- [ ] db connection reuse
+- [x] db connection reuse
 
 # P2
 - [ ] k8s / GKE Deploy
 - [ ] GitHub Action
 - [ ] DB ORM
 - [ ] reCAPTCHA
-- [ ] Redis
 - [ ] API Rate Limit
 - [ ] Custom Slug
-- [ ] New Slug Algorithm

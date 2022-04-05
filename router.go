@@ -9,11 +9,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
-	_ "github.com/joho/godotenv/autoload"
 )
 
-func urls(c *gin.Context) {
-	db, _ := sql.Open("mysql", os.Getenv("dbConnectString"))
+func (e *Env) urls(c *gin.Context) {
 
 	request := ShortUrlRequest{}
 	c.BindJSON(&request)
@@ -35,15 +33,16 @@ func urls(c *gin.Context) {
 			c.JSON(400, gin.H{
 				"message": "expiredAt invalid",
 			})
+			return
 		}
 	}
 	slug := RandString(3)
 
 	if request.ExpireAt != "" {
-		stmt, _ := db.Prepare("INSERT INTO records set url=?,slug=?, expired_at=?;")
+		stmt, _ := e.db.Prepare("INSERT INTO records set url=?,slug=?, expired_at=?;")
 		res, _ = stmt.Exec(request.Url, slug, expiredAt)
 	} else {
-		stmt, _ := db.Prepare("INSERT INTO records set url=?,slug=?;")
+		stmt, _ := e.db.Prepare("INSERT INTO records set url=?,slug=?;")
 		res, _ = stmt.Exec(request.Url, slug)
 	}
 
@@ -54,15 +53,12 @@ func urls(c *gin.Context) {
 		"shortUrl": os.Getenv("baseUrl") + strconv.FormatInt(lastId, 10) + slug,
 	})
 
-	db.Close()
 }
 
-func goUrl(c *gin.Context) {
+func (e *Env) goUrl(c *gin.Context) {
 	var url string
 
-	db, _ := sql.Open("mysql", os.Getenv("dbConnectString"))
-
-	row := db.QueryRow("SELECT url FROM records WHERE CONCAT(id, slug)=? and (expired_at >= now() or expired_at is null);", c.Param("id"))
+	row := e.db.QueryRow("SELECT url FROM records WHERE CONCAT(id, slug)=? and (expired_at >= now() or expired_at is null);", c.Param("id"))
 	row.Scan(&url)
 
 	if url == "" {
@@ -71,6 +67,4 @@ func goUrl(c *gin.Context) {
 	}
 
 	c.Redirect(302, url)
-
-	db.Close()
 }
